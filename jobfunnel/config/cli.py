@@ -299,10 +299,8 @@ def build_config_dict(args_dict: Dict[str, Any]) -> Dict[str, Any]:
     if 'settings_yaml_file' in args_dict:
 
         # Load YAML
-        config = yaml.load(
-            open(args_dict['settings_yaml_file'], 'r'),
-            Loader=yaml.FullLoader,
-        )
+        with open(args_dict['settings_yaml_file'], 'r') as f:
+            config = yaml.load(f, Loader=yaml.FullLoader)
 
         # Inject any base level args (--no-scrape, -log-level)
         config['no_scrape'] = args_dict['no_scrape']
